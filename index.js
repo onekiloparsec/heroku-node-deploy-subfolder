@@ -1,8 +1,7 @@
 const core = require("@actions/core");
 const { execSync } = require("child_process");
 
-// Support Functions
-const createCatFile = (email, api_key) => `cat >~/.netrc <<EOF
+const createNetrcFile = (email, api_key) => `cat > ~/.netrc << EOF
 machine api.heroku.com
     login ${email}
     password ${api_key}
@@ -25,13 +24,16 @@ try {
     console.log("Successfully unshallowed repo.");
   }
 
-  execSync(createCatFile(email, api_key));
+  execSync(createNetrcFile(email, api_key));
   console.log("Successfully wrote to ~./netrc");
 
   execSync("heroku login");
   console.log("Successfully logged into heroku");
 
-  execSync(`heroku git:remote --app ${app_name}`);
+  execSync(`heroku info -a ${app_name}`);
+  console.log("Successfully logged into heroku");
+
+  execSync(`heroku git:remote -a ${app_name}`);
   console.log(`Successfully set remote for ${app_name}.`);
 
   execSync(`
