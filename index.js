@@ -1,7 +1,7 @@
 const core = require("@actions/core");
 const { execSync } = require("child_process");
 
-const createNetrcFile = (email, api_key) => `cat > ~/.netrc << EOF
+const createNetrcFile = (email, api_key) => `cat >~/.netrc <<EOF
 machine api.heroku.com
     login ${email}
     password ${api_key}
