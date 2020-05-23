@@ -1,0 +1,27 @@
+name: "Git deploy to Heroku"
+description: "Deploy through git a Node.js project built into a subfolder to Heroku"
+branding:
+  icon: "upload-cloud"
+  color: "purple"
+inputs:
+  api_key:
+    description: "Your Heroku API key. This will be used for authentication. You can find it in your Heroku account settings"
+    required: true
+  email:
+    description: "The email of your Heroku account."
+    required: true
+  app_name:
+    description: "The app name to use for deploying/updating"
+    required: true
+  branch:
+    description: "The branch that you would like to deploy to Heroku"
+    required: true
+  subfolder:
+    description: "The subfolder where your built code is sitted, e.g. `dist`."
+    required: true
+outputs:
+  status:
+    description: "The Success/Failure of the action"
+runs:
+  using: "node12"
+  main: "index.js"

@@ -1,0 +1,28 @@
+{
+  "name": "heroku-deploy",
+  "version": "1.0.0",
+  "description": "A simple github action that dynamically deploys an app to heroku",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test",
+    "start": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AkhileshNS/heroku-deploy.git"
+  },
+  "keywords": [
+    "heroku",
+    "github",
+	"github-actions"
+  ],
+  "author": "AkhileshNS",
+  "bugs": {
+    "url": "https://github.com/AkhileshNS/heroku-deploy/issues"
+  },
+  "homepage": "https://github.com/AkhileshNS/heroku-deploy#readme",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.2.0"
+  }
+}
