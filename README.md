@@ -10,7 +10,7 @@ It is focused on doing only one thing: deploy through `git` (not Docker) a Node.
 The  `bash/git` command executed is the following (assuming the `heroku` remote has been sucessfully set):
 
 ```
-[ "\`git rev-parse --abbrev-ref HEAD\`" == \"${branch}\" ] && git push heroku \`git subtree split --prefix ${subfolder} ${branch}\`:master --force || echo \"No deploy, wrong branch.\""
+[ "\`git rev-parse --abbrev-ref HEAD\`" == \"${branch}\" ] && git push heroku \`git subtree split --prefix ${subfolder} HEAD\`:master --force || echo \"No deploy, wrong branch.\""
 ```
 
 Note that:
@@ -19,7 +19,7 @@ Note that:
 
 # Usage
 
-In order to use the action in your workflow, just add in your _.github/workflows/YOURACTION.yml_ and fill the `with` parameters.
+In order to use the action in your workflow, just add in your _.github/workflows/YOURACTION.yml_ and fill the `with` parameters. *Make sure your `dist` subfolder is commited (otherwise the `git subtree split` won't detect any change).
 
 # Example
 
@@ -39,7 +39,7 @@ on: [push]
       # possibly setup node action here...
       # possibly cache of node modules action here...
       # build steps here...
-      - uses: onekiloparsec/heroku-node-deploy-subfolder@v1.0.0
+      - uses: onekiloparsec/heroku-node-deploy-subfolder@v1.0.4
         with:
           api_key: ${{secrets.HEROKU_API_KEY}}
           email: ${{secrets.HEROKU_EMAIL}}
@@ -56,7 +56,7 @@ on: [push]
       # possibly setup node action here...
       # possibly cache of node modules action here...
       # build steps here...
-      - uses: onekiloparsec/heroku-node-deploy-subfolder@v1.0.0
+      - uses: onekiloparsec/heroku-node-deploy-subfolder@v1.0.4
         with:
           api_key: ${{secrets.HEROKU_API_KEY}}
           email: ${{secrets.HEROKU_EMAIL}}
