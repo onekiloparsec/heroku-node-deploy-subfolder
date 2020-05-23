@@ -28,8 +28,6 @@ try {
   console.log("Successfully wrote to ~./netrc");
 
   execSync("heroku login");
-  console.log("Successfully logged into heroku");
-
   execSync(`heroku info -a ${app_name}`);
   console.log("Successfully logged into heroku");
 
