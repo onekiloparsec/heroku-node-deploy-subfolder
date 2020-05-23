@@ -19,7 +19,7 @@ Note that:
 
 # Usage
 
-In order to use the action in your workflow, just add in your _.github/workflows/YOURACTION.yml_ and fill the `with` parameters. *Make sure your `dist` subfolder is commited (otherwise the `git subtree split` won't detect any change).*
+In order to use the action in your workflow, just add in your _.github/workflows/YOURACTION.yml_ and fill the `with` parameters. **Make sure your `dist` subfolder is commited (otherwise the `git subtree split` won't detect any change).**
 
 # Example
 
