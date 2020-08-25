@@ -50,7 +50,7 @@ on: [push]
   deploy-prod:
     runs-on: ubuntu-latest
     needs: test-unit
-    if: github.ref == 'refs/heads/develop'
+    if: github.ref == 'refs/heads/master'
     steps:
       - uses: actions/checkout@v2
       # possibly setup node action here...
