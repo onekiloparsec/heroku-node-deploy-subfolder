@@ -35,7 +35,7 @@ try {
   console.log(`Successfully set remote for ${app_name}.`);
     
   execSync(`
-    [ \"\`git rev-parse --abbrev-ref HEAD\`\" == \"${branch}\" ] && git push heroku \`git subtree split --prefix=${subfolder} HEAD\`:master --force || echo \"No deploy, wrong branch.\"
+    [ \"\`git rev-parse --abbrev-ref HEAD\`\" == \"${branch}\" ] && git push heroku \`git subtree split --prefix=${subfolder} HEAD\`:${branch} --force || echo \"No deploy, wrong branch.\"
   `, {shell: '/bin/bash'})
   console.log("Deploy successful.");
 
