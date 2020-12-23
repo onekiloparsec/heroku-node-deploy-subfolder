@@ -14,7 +14,7 @@ EOF`;
 const api_key = core.getInput("api_key");
 const email = core.getInput("email");
 const app_name = core.getInput("app_name");
-const branch = core.getInput("branch");
+const heroku_branch = core.getInput("heroku_branch");
 const subfolder = core.getInput("subfolder");
 
 try {
@@ -34,12 +34,11 @@ try {
   execSync(`heroku git:remote -a ${app_name}`);
   console.log(`Successfully set remote for ${app_name}.`);
     
-  execSync(`
-    [ \"\`git rev-parse --abbrev-ref HEAD\`\" == \"${branch}\" ] && git push heroku \`git subtree split --prefix=${subfolder} HEAD\`:${branch} --force || echo \"No deploy, wrong branch.\"
-  `, {shell: '/bin/bash'})
+  execSync(`git push heroku \`git subtree split --prefix=${subfolder} HEAD\`:${heroku_branch} --force`, {shell: '/bin/bash'})
   console.log("Deploy successful.");
 
-  core.setOutput("status", `Successfully deployed heroku app from branch ${branch}`);
+  const currentBranch = execSync("git rev-parse --abbrev-ref HEAD").toString();
+  core.setOutput("status", `Successfully deployed heroku app from ${currentBranch} to ${heroku_branch}`);
 } catch (err) {
   core.setFailed(err.toString());
 }
