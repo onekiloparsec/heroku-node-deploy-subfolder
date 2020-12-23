@@ -8,13 +8,13 @@ inputs:
     description: "Your Heroku API key. This will be used for authentication. You can find it in your Heroku account settings"
     required: true
   email:
-    description: "The email of your Heroku account."
+    description: "The email of your Heroku account (needed for auth)."
     required: true
   app_name:
     description: "The app name to use for deploying/updating"
     required: true
-  branch:
-    description: "The branch that you would like to deploy to Heroku"
+  heroku_branch:
+    description: "The Heroku branch name that you would like to deploy to (`master` or `main`)."
     required: true
   subfolder:
     description: "The subfolder where your built code is sitted, e.g. `dist`."
