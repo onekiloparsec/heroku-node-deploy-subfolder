@@ -10,11 +10,11 @@ It is focused on doing only one thing: deploy through `git` (not Docker) a Node.
 The  `bash/git` command executed is the following (assuming the `heroku` remote has been sucessfully set):
 
 ```
-[ "\`git rev-parse --abbrev-ref HEAD\`" == \"${branch}\" ] && git push heroku \`git subtree split --prefix ${subfolder} HEAD\`:master --force || echo \"No deploy, wrong branch.\""
+git push heroku \`git subtree split --prefix ${subfolder} HEAD\`:${heroku_branch} --force""
 ```
 
 Note that:
-* We always double-check for the correct branch. How awful it can be to deploy the wrong code to the wrong place.
+* We **do not** double-check for the correct branch anymore (we used to do it), because this is something that the CI file must take care of.
 * We always use `--force` to ensure the push is always working, even if in the meantime some manual deploy have been triggered from another place.
 
 # Usage
@@ -23,13 +23,17 @@ In order to use the action in your workflow, just add in your _.github/workflows
 
 # Example
 
-Below is an example with two build-and-deploy jobs, using staging and prod.
+Below is an example with two build-and-deploy files, one using staging and one for prod.
 
 ```yaml
-name: build-and-deploy
+name: my-awesome-actions-jobs-staging
 
-on: [push]
-
+on:
+  push:
+    branches:
+      - develop
+      
+jobs:
   deploy-staging:
     runs-on: ubuntu-latest
     needs: test-unit
@@ -44,9 +48,19 @@ on: [push]
           api_key: ${{secrets.HEROKU_API_KEY}}
           email: ${{secrets.HEROKU_EMAIL}}
           app_name: <APP_NAME_STAGING>
-          branch: "develop"
+          heroku_branch: "master"
           subfolder: "dist-staging"
+```
 
+```yaml
+name: my-awesome-actions-jobs-prod
+
+on:
+  push:
+    branches:
+      - master
+      
+jobs:
   deploy-prod:
     runs-on: ubuntu-latest
     needs: test-unit
@@ -61,7 +75,7 @@ on: [push]
           api_key: ${{secrets.HEROKU_API_KEY}}
           email: ${{secrets.HEROKU_EMAIL}}
           app_name: <APP_NAME_PROD>
-          branch: "master"
+          heroku_branch: "master"
           subfolder: "dist-prod"
 ```
 
