@@ -23,6 +23,6 @@
   "homepage": "https://github.com/onekiloparsec/heroku-node-deploy-subfolder#readme",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.2.6"
+    "@actions/core": "^1.9.1"
   }
 }
